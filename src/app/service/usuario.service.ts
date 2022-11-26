@@ -1,7 +1,9 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse, HttpResponse} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {Response} from "../interface/response";
+import { Usuario } from '../interface/usuario';
+import { catchError, empty, map, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +15,17 @@ export class UsuarioService {
   }
 
   get() {
-    return this.http.get<Response>(`http://localhost:8080/`)
+    return this.http.get<Response<Usuario>>(`http://localhost:8080/`).pipe(
+      map( (response) => response.dados?.values),
+      catchError( error => { 
+        console.error(error)
+        return of([])
+      })
+    )
   }
 
   register(usuario: any) {
-    return this.http.post<Response>(`api/candidato/cadastrar`, usuario)
+    return this.http.post<Response<any>>(`api/candidato/cadastrar`, usuario)
   }
 
   update(usuario: any) {
