@@ -1,0 +1,171 @@
+<div class="container-sm mb-3 pt-3 ms-lg-auto pe-lg-5">
+  <form [formGroup]="usuarioForm" (ngSubmit)="onSubmit()" xmlns="http://www.w3.org/1999/html">
+    <div class="text-black h3 pt-3">Cadastro</div>
+    <div class="text-sm-end text-form">(*) Obrigatorio</div>
+    <div *ngIf="ok">
+      <div class="alert alert-success" role="alert">
+        <h4 class="alert-heading">Cadastro realizado com sucesso</h4>
+        <hr>
+        <p class="mb-0">CANDI</p>
+      </div>
+    </div>
+      <div class="row">
+        <div class="col">
+          <label for="inputNome" class="form-label pt-2">Nome*</label>
+          <input type="text" class="form-control" formControlName="nome" id="inputNome" placeholder="Nome">
+          <div *ngIf="nome.errors?.['required'] && nome.touched" class="text-danger form-text">Nome Obrigatorio
+          </div>
+          <div *ngIf="nome.errors?.['maxlength'] && nome.touched" class="text-danger form-text">Máximo 30 caracteres
+          </div>
+        </div>
+        <div class="col">
+          <label for="inputPassword4" class="form-label pt-2">Sobrenome*</label>
+          <input type="text" class="form-control" formControlName="sobrenome" id="inputPassword4"
+                 placeholder="Sobrenome">
+          <div *ngIf="sobrenome.errors?.['maxlength']" class="text-danger form-text">Máximo de 30 caracteres</div>
+        </div>
+      </div>
+      <div class="col-auto">
+        <label for="inputEmail" class="form-label pt-2">Email*</label>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" formControlName="email" id="inputEmail" placeholder="Email"
+                 aria-describedby="basic-addon">
+          <span class="input-group-text" id="basic-addon">@example.com</span>
+        </div>
+        <div *ngIf="emailCadastrado" class="text-danger form-text">O email já foi cadastrado</div>
+        <div *ngIf="email.errors?.['required'] && email.dirty" class="text-danger form-text">O email é
+          obrigatorio
+        </div>
+        <div *ngIf="email.errors?.['email'] && email.touched" class="text-danger form-text">O email precisa estar bem
+          formatado
+        </div>
+        <div *ngIf="email.errors?.['minlength'] && email.touched" class="text-danger form-text">Mínimo de 8 caracteres
+        </div>
+        <div *ngIf="email.errors?.['maxlength'] && email.touched" class="text-danger form-text">Máximo de 30
+          caracteres
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <label for="inputSenha" class="form-label pt-2">Senha*</label>
+          <input type="password" class="form-control" formControlName="senha" id="inputSenha" required>
+          <div *ngIf="senha.errors?.['required'] && senha.touched" class="text-danger form-text">Senha é obrigatoria
+          </div>
+          <div *ngIf="senha.errors?.['minlength'] && senha.touched" class="text-danger form-text">Sua senha deve ter no
+            mínimo 8 caracteres
+          </div>
+          <div *ngIf="senha.errors?.['maxlength'] && senha.touched" class="text-danger form-text">Sua senha deve ter no
+            máximo 30
+            caracteres
+          </div>
+        </div>
+        <div class="col">
+          <label for="inputSenha" class="form-label pt-2">Repita a senha*</label>
+          <input type="password" class="form-control" formControlName="cSenha" id="inputCSenha">
+          <label *ngIf="senha.errors?.['required'] && senha.touched" class="text-danger form-text">Campo
+            obrigatorio</label>
+          <div *ngIf="senhaDiferentes() && senha.touched" class="text-danger form-text">Senhas devem ser iguais</div>
+        </div>
+      </div>
+      <div class="col-auto">
+        <label for="inputSobre" class="form-label pt-2">Sobre*</label>
+        <textarea class="form-control" formControlName="sobre" id="inputSobre" rows="3"></textarea>
+      </div>
+
+      <div formGroupName="endereco">
+        <div class="text-black h4 pt-2">Endereço</div>
+        <div class="row-cols-2">
+          <label for="inputCep" class="form-label pt-2">Cep</label>
+          <input type="number" class="form-control" id="inputCep">
+          <label for="inputEstado" class="form-label pt-2">Estado</label>
+          <input type="text" class="form-control" id="inputEstado">
+          <label for="inputCidade" class="form-label pt-2">Cidade</label>
+          <input type="text" class="form-control" id="inputCidade">
+        </div>
+      </div>
+
+      <div formGroupName="contato">
+        <div class="text-black h4 pt-2">Contato</div>
+        <div class="row-cols-2">
+          <label for="inputCep" class="form-label pt-2">Email para contato</label>
+          <input type="text" class="form-control" id="inputEmailContato">
+        </div>
+        <label for="inputTelefone" class="form-label pt-2">Telefone</label>
+        <input type="number" class="form-control" id="inputTelefone" minlength="14" maxlength="14">
+        <div></div>
+        <div class="row-cols-2">
+        </div>
+        <div class="row-cols-2">
+          <label for="inputSite" class="form-label pt-2">Site</label>
+          <input type="text" class="form-control" id="inputSite">
+        </div>
+      </div>
+
+      <div formArrayName="atividades">
+        <div class="row">
+          <div class="col text-black h4 pt-2">Atividades</div>
+          <div class="col d-grid d-md-flex justify-content-end pt-2">
+            <button type="button" [disabled]="atividades.invalid" class="btn btn-success btn-sm"
+                    (click)="addAtividade()">
+              <a></a>
+              Adicionar
+            </button>
+          </div>
+          <div *ngIf="atividadesMax" class="text-danger h6"> Máximo de atividades cadastradas</div>
+        </div>
+        <div *ngFor="let atividade of atividades.controls; index as i">
+          <div [formGroupName]="i" class="col-auto">
+            <div class="row">
+              <div class="col">
+                <label for="inputLocal" class="form-label pt-2">Local</label>
+                <input type="text" formControlName="local" class="form-control" id="inputLocal">
+              </div>
+              <div class="col">
+                <label for="inputFuncao" class="form-label pt-2">Função</label>
+                <input type="text" class="form-control" formControlName="nome" id="inputFuncao">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label for="inputSobre" class="form-label pt-2">Sobre</label>
+                <input type="text" formControlName="sobre" class="form-control" id="inputSobreAtividade">
+              </div>
+              <div class="col"><label for="inputDataInicio" class="form-label pt-2">Data Inicio</label>
+                <input type="date" formControlName="dataInicio" class="form-control" id="inputDataInicio"
+                       placeholder="yyyy-mm-dd" min="1997-01-01" max="2030-12-31">
+              </div>
+              <div class="col">
+                <label for="inputDataInicio" class="form-label pt-2">Data Termino</label>
+                <input type="date" formControlName="dataTermino" class="form-control" id="inputDataTermino"
+                       placeholder="yyyy-mm-dd" min="1997-01-01" max="2030-12-31">
+              </div>
+            </div>
+            <label for="inputDataInicio" class="form-label h6  pt-3 me-5">Ativo?</label>
+            <div class="form-check-inline">
+              <input class="form-check-input" formControlName="ativo" name="ativo" type="radio"
+                     id="radio" value="true">
+              <label class="form-check-label" for="radio">
+                Sim
+              </label>
+            </div>
+            <div class="form-check-inline">
+              <input class="form-check-input" formControlName="ativo" name="ativo" type="radio" id="radio2"
+                     value="false">
+              <label class="form-check-label" for="radio2">
+                Não
+              </label>
+            </div>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+              <button type="button" class="btn btn-danger btn-sm" (click)="removeAtividade(i)">Remover</button>
+            </div>
+            <div *ngIf="atividade.invalid" class="text-danger">Inválido</div>
+          </div>
+        </div>
+      </div>
+      <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+        <button type="button" class="btn btn-outline-secondary w10" (click)="voltar()">Voltar ao Inicio</button>
+        <input type="submit" class="btn btn-primary w10" value="Cadastrar">
+      </div>
+
+  </form>
+</div>

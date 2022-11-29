@@ -6,10 +6,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
+  isAuth(): boolean{
+    return localStorage.getItem('token') != null;
+  }
+
+  isUser(): boolean{
+    return localStorage.getItem('role') == 'Usuário';
+  }
+
+  isAdmin(): boolean{
+    return localStorage.getItem('role') == ( 'Administrador' );
+  }
+
+  isRecrutador(): boolean{
+    return localStorage.getItem('role') == ('Recrutador');
   }
 
 }

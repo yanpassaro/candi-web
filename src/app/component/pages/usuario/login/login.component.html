@@ -1,1 +1,59 @@
-<p>login works!</p>
+<div class="container-sm mb-5 pt-5 ms-lg-auto pe-lg-5">
+  <div class="text-black h2 pt-5 pe-lg-5">LOGIN</div>
+  <div class="card text-center w-auto" style="align-items: center; width: 100px">
+    <form [formGroup]="loginForm">
+      <div class="card-body">
+        <div class="row">
+          <div class="col">
+            <label for="inputEmail" class="form-label h3 pt-3">Email*</label>
+            <input type="text" class="form-control" formControlName="email" id="inputEmail" placeholder="Email"
+                   aria-describedby="basic-addon">
+            <div class="text-danger form-text"> {{ mensagem }} </div>
+            <div *ngIf="email.errors?.['required'] && email.dirty" class="text-danger form-text">O email é
+              obrigatorio
+            </div>
+            <div *ngIf="email.errors?.['email'] && email.touched" class="text-danger form-text">O email precisa estar
+              bem
+              formatado
+            </div>
+            <div *ngIf="email.errors?.['minlength'] && email.touched" class="text-danger form-text">Mínimo de 8
+              caracteres
+            </div>
+            <div *ngIf="email.errors?.['maxlength'] && email.touched" class="text-danger form-text">Máximo de 30
+              caracteres
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <label for="inputSenha" class="form-label h5 pt-2">Senha*</label>
+          <input type="password" class="form-control" formControlName="senha" id="inputSenha" required>
+          <div *ngIf="senha.errors?.['required'] && senha.touched" class="text-danger form-text">Senha é obrigatoria
+          </div>
+          <div *ngIf="senha.errors?.['minlength'] && senha.touched" class="text-danger form-text">Sua senha deve ter no
+            mínimo 8 caracteres
+          </div>
+          <div *ngIf="senha.errors?.['maxlength'] && senha.touched" class="text-danger form-text">Sua senha deve ter no
+            máximo 30
+            caracteres
+          </div>
+        </div>
+        <label class="form-label h5 pt-5 me-5">Ativo?</label>
+        <div class="form-check-inline">
+          <input class="form-check-input" formControlName="tipo" name="ativo" type="radio"
+                 id="radio" value="empresa">
+          <label class="form-check-label" for="radio">
+            Administrador
+          </label>
+        </div>
+        <div class="form-check-inline">
+          <input class="form-check-input" formControlName="tipo" name="ativo" type="radio" id="radio2"
+                 value="usuario">
+          <label class="form-check-label" for="radio2">
+            Usuário
+          </label>
+        </div>
+      </div>
+    </form>
+    <div class="pt-5 me-lg-auto"></div>
+  </div>
+</div>

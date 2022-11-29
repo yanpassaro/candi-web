@@ -1,0 +1,52 @@
+<h2>Vaga</h2>
+<form [formGroup]="vagaForm" (ngSubmit)="onSubmit()" class="row-cols-auto">
+  <div>
+    <div class="container-sm" >
+      <div class="row-cols-2">
+        <label for="inputNome" class="form-label">Nome</label>
+        <input type="text" class="form-control" formControlName="nome" id="inputNome">
+        <div *ngIf="nome.errors?.['required'] && nome.touched" class="text-danger form-text"></div>
+      </div>
+      <div class="row-cols-2">
+        <label for="inputExperiencia" class="form-label">Experiencia *</label>
+        <input type="text" class="form-control" formControlName="experiencia" id="inputExperiencia">
+        <div *ngIf="experiencia.errors?.['required'] && experiencia.touched" class="text-danger form-text"></div>
+      </div>
+      <div class="row-cols-2">
+        <label for="inputBeneficios" class="form-label">Beneficios</label>
+        <input type="text" class="form-control" formControlName="beneficios" id="inputBeneficios">
+        <div *ngIf="beneficios.errors?.['required'] && beneficios.touched" class="text-danger form-text"></div>
+      </div>
+      <div class="row-cols-2">
+        <label for="inputDataTermino" class="form-label">Data termino</label>
+        <input type="data" class="form-control" formControlName="dataTermino" id="inputDataTermino"
+               placeholder="yyyy-mm-dd">
+      </div>
+      <div class="row-col-2">
+        <label for="inputSobre" class="form-label">Sobre</label>
+        <input type="text" class="form-control" formControlName="sobre" id="inputSobre">
+        <div *ngIf="sobre.errors?.['required'] && sobre.touched" class="text-danger form-text"></div>
+      </div>
+      <h2>Perguntas</h2>
+      <div formArrayName="perguntas">
+      <div class="btn btn-success btn-sm">
+        <button type="button" class="btn btn-success btn-sm" (click)="addPerguntas()">Adicionar Perguntas</button>
+      </div>
+      <div *ngFor="let perguntas of perguntas.controls; index as i">
+        <div [formGroupName]="i" class="col-auto">
+        <label for="inputPerguntas" class="form-label">Pergunta</label>
+        <input type="text" formControlName="Perguntas" class="form-control" id="inputPerguntas">
+        </div>
+        <div *ngIf="perguntas.invalid" class="text-danger">Inválido</div>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+          <button type="button" class="btn btn-danger btn-sm" (click)="removePerguntas(i)">Remover</button>
+        </div>
+      </div>
+    </div>
+      <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+        <button type="button" class="btn btn-primary w10">Cadastrar</button>
+        <input type="submit" class="btn btn-primary w10" value="Cadastrar">
+      </div>
+    </div>
+  </div>
+</form>

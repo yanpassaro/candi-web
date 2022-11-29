@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpResponse} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {Response} from "../interface/response";
-import { Usuario } from '../interface/usuario';
-import { catchError, empty, map, of } from 'rxjs';
+import {Usuario} from '../interface/usuario';
+import {catchError, of, tap} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,25 +14,33 @@ export class UsuarioService {
   constructor(private http: HttpClient) {
   }
 
+  getHome() {
+    return this.http.get<Response<Usuario>>(this.url).pipe(
+      tap(resp => {
+        return resp.message
+      }),
+      catchError(err => err.mensagem)
+    )
+  }
+
   get() {
-    return this.http.get<Response<Usuario>>(`http://localhost:8080/`).pipe(
-      map( (response) => response.dados?.values),
-      catchError( error => { 
-        console.error(error)
-        return of([])
-      })
+    return this.http.get<Response<Usuario>>(`http://localhost:8080/api/candidato/visualizar`).pipe(
+      tap(resp => {
+        return resp.data
+      }),
+      catchError(err => err.mensagem)
     )
   }
 
   register(usuario: any) {
-    return this.http.post<Response<any>>(`api/candidato/cadastrar`, usuario)
+    return this.http.post<Response<Usuario>>(`http://localhost:8080/api/usuario/cadastrar`, usuario)
   }
 
   update(usuario: any) {
-    return this.http.put(this.url + `/candidato/atualizar` + localStorage.getItem('token'), usuario)
+    return this.http.put<Response<Usuario>>(`http://localhost:8080/api/candidato/atualizar` + localStorage.getItem('token'), usuario)
   }
 
   delete() {
-    return this.http.delete(this.url + `/candidato/deletar/` + localStorage.getItem('token'))
+    return this.http.delete<Response<Usuario>>(`http://localhost:8080/api/candidato/deletar/` + localStorage.getItem('token'))
   }
 }

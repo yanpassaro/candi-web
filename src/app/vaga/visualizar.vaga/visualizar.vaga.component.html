@@ -1,0 +1,30 @@
+<div *ngIf="notExist">
+  <div class="alert alert-info" role="alert">
+    <h4 class="alert-heading">Nenhuma vaga cadastrada</h4>
+    <p>No momento não há nenhuma vaga cadastrada no CANDI. Volte outra hora.</p>
+    <hr>
+    <p class="mb-0">CANDI</p>
+  </div>
+</div>
+<div class="container-sm mb-3 pt-3 ms-lg-auto pe-lg-5">
+  <div class="text- text-dark h3 pt-3"> Vagas</div>
+  <div class="row row-cols-1 row-cols-md-2">
+    <div *ngFor="let vaga of vagas">
+      <div class="col pt-3 mb-5">
+        <div class="card" style="width: 100%">
+          <div class="card-body">
+            <div aria-hidden="true">
+              <h2 class="card-header" style="background-color: black; color: aliceblue">{{vaga.nome}}</h2>
+              <h4 class="card-text ms-2">{{vaga.empresa?.nome}}</h4>
+              <h4 class="card-text ms-2">{{vaga.empresa?.cidade}}, {{vaga.empresa?.estado}}</h4>
+              <h4 class="card-text ms-2">{{vaga.tipo}}</h4>
+              <h4 class="card-text ms-2"></h4>
+            </div>
+            <h4 class="card-footer card-link ms-2">Termina em: {{vaga.dataTermino}}</h4>
+            <a (click)="detalhar()" class="btn btn-primary">Detalhes da vaga</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

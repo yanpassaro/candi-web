@@ -1,17 +1,2 @@
-* {
-   box-sizing: border-box;
-   margin: 0;
-   padding: 0;
- }
- 
- *:focus {
-   outline: 0;
- }
-
- @media screen and (max-width: 600px) {
-   .col-25, .col-75, input[type=submit] {
-     width: 100%;
-     margin-top: 0;
-   }
- }
- 
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

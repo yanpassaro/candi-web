@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CadastroComponent } from './cadastro.component';
+import { VisualizarVagaComponent } from './visualizar.vaga.component';
 
-describe('CadastroComponent', () => {
-  let component: CadastroComponent;
-  let fixture: ComponentFixture<CadastroComponent>;
+describe('VisualizarVagaComponent', () => {
+  let component: VisualizarVagaComponent;
+  let fixture: ComponentFixture<VisualizarVagaComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CadastroComponent ]
+      declarations: [ VisualizarVagaComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(CadastroComponent);
+    fixture = TestBed.createComponent(VisualizarVagaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
