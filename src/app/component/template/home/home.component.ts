@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgIf } from '@angular/common';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-home',

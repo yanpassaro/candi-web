@@ -10,7 +10,6 @@ import {UsuarioService} from "../../../service/usuario.service";
 })
 export class CadastrarComponent implements OnInit {
   emailCadastrado?: boolean;
-  atividadesMax?: boolean;
   ok: boolean = false;
 
   usuarioForm = new FormGroup({
@@ -50,7 +49,6 @@ export class CadastrarComponent implements OnInit {
 
   ngOnInit(): void {}
 
-
   get nome(): FormControl {
     return this.usuarioForm.get('nome') as FormControl;
   }
@@ -75,38 +73,8 @@ export class CadastrarComponent implements OnInit {
     return this.usuarioForm.get('cSenha') as FormControl
   }
 
-  get atividades(): FormArray {
-    return this.usuarioForm.get('atividades') as FormArray;
-  }
-
-  addAtividade() {
-    if (this.atividades.length < 2) {
-      this.atividades.push(
-        new FormGroup({
-          local: new FormControl(null),
-          nome: new FormControl(null),
-          sobre: new FormControl(null),
-          dataInicio: new FormControl(null),
-          dataTermino: new FormControl(null),
-          ativo: new FormControl(false)
-        })
-      )
-      this.atividadesMax = false;
-    } else {
-      this.atividadesMax = true;
-    }
-  }
-
   senhaDiferentes() {
     return this.senha.getRawValue() != this.cSenha.getRawValue();
-  }
-
-
-  removeAtividade(idx: number) {
-    if (this.atividades.length > 1) {
-      this.atividades.removeAt(idx)
-      this.atividadesMax = false;
-    }
   }
 
   voltar() {

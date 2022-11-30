@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-light">
   <div class="container-fluid">
-    <img src="../../../../assets/Candi.png" alt="Logo" width="28" height="30" class="img-thumbnail">
+    <img src="../../../../assets/Candi.png" alt="Logo" width="30" height="30" class="img-thumbnail">
     <span class="navbar-brand mb-0 h1"> CANDI </span>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
@@ -16,17 +16,23 @@
         <li class="nav-item" *ngIf="!isAuth()">
           <a class="nav-link" routerLink="cadastrar/empresa">Cadastrar Empresa</a>
         </li>
+        <li class="nav-item" *ngIf="isAdmin()">
+        <a class="nav-link" routerLink="cadastrar/vaga">Cadastrar Vaga</a>
+      </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="empresas">Empresas</a>
+          <a class="nav-link" routerLink="visualizar/empresas">Empresas</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="visualizar/vaga">Vagas</a>
         </li>
-        <li class="nav-item" *ngIf="isUser()">
-          <a class="nav-link" routerLink="usuario">Perfil</a>
+        <li class="nav-item" *ngIf="isAdmin()">
+          <a class="nav-link" routerLink="empresa/vagas">Suas vagas</a>
         </li>
-        <li class="nav-item" *ngIf="isAdmin() || isRecrutador()">
-          <a class="nav-link" routerLink="empresa">Perfil</a>
+        <li class="nav-item" *ngIf="isUser()">
+          <a class="nav-link" routerLink="perfil">Perfil</a>
+        </li>
+        <li class="nav-item" *ngIf="isAdmin()">
+          <a class="nav-link" routerLink="perfil/empresa">Perfil</a>
         </li>
         <li class="nav-item" (click)="logout()" *ngIf="isAuth()">
           <a class="nav-link" routerLink="login">Logout</a>

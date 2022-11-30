@@ -10,7 +10,7 @@ import {FormControl, FormGroup} from "@angular/forms";
   styleUrls: ['./visualizar.vaga.component.css']
 })
 export class VisualizarVagaComponent implements OnInit {
-  vagas?: Vaga[]
+  vagas!: Vaga[]
   notExist?: boolean = false;
   page = new FormGroup({
   pagina: new FormControl(['1'])
@@ -26,14 +26,14 @@ export class VisualizarVagaComponent implements OnInit {
           this.notExist = true;
         } else {
           console.log(r.datas?.length)
-          this.vagas = r.datas
+          this.vagas = r.datas!
           console.log(this.vagas)
         }
       }
     )
   }
 
-  detalhar(){
-    this.router.navigate(["candidatar"]).then(r => console.log(r))
+  detalhar(id?: any){
+    this.router.navigate(["candidatar", id]).then(r => console.log(r))
   }
 }

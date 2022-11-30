@@ -2,49 +2,46 @@ import { Injectable } from '@angular/core';
 import {Response} from "../interface/response";
 import {Usuario} from "../interface/usuario";
 import {catchError, of, tap} from "rxjs";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {Vaga} from "../interface/vaga";
+import {Router} from "@angular/router";
+import {Candidatura} from "../interface/candidatura";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CandidaturaService {
   private url: string = environment.API
+  token
+  header
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) {
+    if (localStorage.length == 0) {
+      router.navigate([""])
+    }
+    this.token = localStorage.getItem('token')
+    this.header = new HttpHeaders({'token': this.token!})
+  }
 
   register(candidatura: any) {
-    return this.http.post<Response<Usuario>>(`http://localhost:8080/api/candidatura/cadastrar`, candidatura).pipe(
-      tap(resp => {
-        return resp.message
-      }),
-      catchError(err => {
-        if (err.status == 500) {
-          throw err.error.message
-        }
-        if (err.status == 400) {
-          throw err.error.mensagem
-        }
-        return of([])
-      })
-    )
-  }
-  get() {
-    return this.http.get<Response<Usuario>>(`http://localhost:8080/api/candidatura/visualizar`).pipe(
-      tap(resp => {
-        return resp.data
-      }),
-      catchError(err => err.error.message)
-    )
+    return this.http.post<Response<Candidatura>>(`http://localhost:8080/api/candidatura/cadastrar`, candidatura, {'headers': this.header})
   }
 
+  getAllByVaga(id: any) {
+    return this.http.get<Response<Candidatura[]>>(`http://localhost:8080/api/candidatura/visualizar?page=0&id=` +id, {'headers': this.header})
+  }
 
-  deletarCandidatura() {
-    return this.http.delete<Response<Usuario>>(`http://localhost:8080/api/candidatura/deletar/` + localStorage.getItem('token'))
+  deletarCandidatura(id: any) {
+    return this.http.delete<Response<Usuario>>(`http://localhost:8080/api/candidatura/deletar?id=`+id,{'headers': this.header})
   }
 
   detalhar(id: any) {
-    return this.http.get<Response<Usuario>>(`http://localhost:8080/api/candidatura/detalhar?id=` + id )
+    return this.http.get<Response<Candidatura>>(`http://localhost:8080/api/candidatura/detalhar?id=` + id , {'headers': this.header})
   }
+
+  analisar(body: any, id: any){
+    return this.http.post<Response<Candidatura>>('http://localhost:8080/api/empresa/analisar?vaga=' + id, body,{'headers': this.header})
+  }
+
 }

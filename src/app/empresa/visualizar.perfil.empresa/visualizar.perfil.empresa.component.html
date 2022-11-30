@@ -1,0 +1,65 @@
+<div class="container-sm mb-3 pt-3 ms-lg-auto pe-lg-5">
+  <div class="tab-content" id="v-pills-tabContent">
+    <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+      <div *ngIf="empresas">
+        <div class="text-black h3 pt-3">Perfil</div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <label class="form-label pt-2">Nome</label>
+          <div class="text-black"> {{ empresas?.nome }} </div>
+        </div>
+        <div class="col">
+          <label class="form-label pt-2">Cnpj</label>
+          <div class="text-black"> {{ empresas?.cnpj }} </div>
+        </div>
+        <div class="col">
+          <label class="form-label pt-2">Sobre</label>
+          <div class="text-black"> {{ empresas?.sobre }} </div>
+        </div>
+      </div>
+      <div class="text-black h4 pt-2">Endereço</div>
+      <div class="form-text"> {{empresas?.endereco?.id}} </div>
+      <div class="row-cols-3">
+        <label class="form-label pt-2">CEP</label>
+        <div class="text-black"> {{empresas?.endereco?.cep}} </div>
+        <label class="form-label pt-2">Estado</label>
+        <div class="text-black"> {{empresas?.endereco?.cidade}}</div>
+        <label class="form-label pt-2">Cidade</label>
+        <div class="text-black"> {{empresas?.endereco?.estado}} </div>
+      </div>
+    </div>
+
+    <div class="text-black h4 pt-2">Contato</div>
+    <div class="form-text"> {{empresas?.contato?.id}} </div>
+    <div class="row-cols-3">
+      <label class="form-label pt-2">Email</label>
+      <div class="text-black"> {{empresas?.contato?.email}} </div>
+      <label class="form-label pt-2">Telefone</label>
+      <div class="text-black">{{empresas?.contato?.telefone}}</div>
+      <label class="form-label pt-2">Site</label>
+      <div class="text-black"> {{empresas?.contato?.site}} </div>
+    </div>
+
+    <div class="text-black h4 pt-2">Administradores</div>
+    <div *ngFor="let admin of empresas.recrutadores; index as i">
+      <div>
+        <div class="form-text"> {{admin?.id}} </div>
+        <div class="row-cols-3">
+          <label class="form-label pt-2">Email</label>
+          <div class="text-black"> {{admin?.email}} </div>
+          <label class="form-label pt-2">Nome</label>
+          <div class="text-black">{{admin?.nome}}</div>
+          <label class="form-label pt-2">Sobrenome</label>
+          <div class="text-black"> {{admin?.sobrenome}}</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="d-grid gap-2 d-md-flex justify-content-md-start pt-4 me-3 pe-4 ms-2">
+    <button type="button" class="btn btn-outline-secondary" (click)="voltar()">Voltar ao Inicio</button>
+    <button type="button" class="btn btn-outline-danger" (click)="deletar()">Deletar conta</button>
+    <button type="button" class="btn btn-outline-danger" (click)="visualizarVagas()">Visualizar Vagas</button>
+  </div>
+</div>

@@ -1,7 +1,7 @@
 <div class="container-sm mb-3 pt-3 ms-lg-auto pe-lg-5">
   <form [formGroup]="usuarioForm" (ngSubmit)="onSubmit()" xmlns="http://www.w3.org/1999/html">
     <div class="text-black h3 pt-3">Cadastro</div>
-    <div class="text-sm-end text-form">(*) Obrigatorio</div>
+    <div class="text-sm-end text-form">(*) Obrigatório</div>
     <div *ngIf="ok">
       <div class="alert alert-success" role="alert">
         <h4 class="alert-heading">Cadastro realizado com sucesso</h4>
@@ -101,70 +101,9 @@
         </div>
       </div>
 
-      <div formArrayName="atividades">
-        <div class="row">
-          <div class="col text-black h4 pt-2">Atividades</div>
-          <div class="col d-grid d-md-flex justify-content-end pt-2">
-            <button type="button" [disabled]="atividades.invalid" class="btn btn-success btn-sm"
-                    (click)="addAtividade()">
-              <a></a>
-              Adicionar
-            </button>
-          </div>
-          <div *ngIf="atividadesMax" class="text-danger h6"> Máximo de atividades cadastradas</div>
-        </div>
-        <div *ngFor="let atividade of atividades.controls; index as i">
-          <div [formGroupName]="i" class="col-auto">
-            <div class="row">
-              <div class="col">
-                <label for="inputLocal" class="form-label pt-2">Local</label>
-                <input type="text" formControlName="local" class="form-control" id="inputLocal">
-              </div>
-              <div class="col">
-                <label for="inputFuncao" class="form-label pt-2">Função</label>
-                <input type="text" class="form-control" formControlName="nome" id="inputFuncao">
-              </div>
-            </div>
-            <div class="row">
-              <div class="col">
-                <label for="inputSobre" class="form-label pt-2">Sobre</label>
-                <input type="text" formControlName="sobre" class="form-control" id="inputSobreAtividade">
-              </div>
-              <div class="col"><label for="inputDataInicio" class="form-label pt-2">Data Inicio</label>
-                <input type="date" formControlName="dataInicio" class="form-control" id="inputDataInicio"
-                       placeholder="yyyy-mm-dd" min="1997-01-01" max="2030-12-31">
-              </div>
-              <div class="col">
-                <label for="inputDataInicio" class="form-label pt-2">Data Termino</label>
-                <input type="date" formControlName="dataTermino" class="form-control" id="inputDataTermino"
-                       placeholder="yyyy-mm-dd" min="1997-01-01" max="2030-12-31">
-              </div>
-            </div>
-            <label for="inputDataInicio" class="form-label h6  pt-3 me-5">Ativo?</label>
-            <div class="form-check-inline">
-              <input class="form-check-input" formControlName="ativo" name="ativo" type="radio"
-                     id="radio" value="true">
-              <label class="form-check-label" for="radio">
-                Sim
-              </label>
-            </div>
-            <div class="form-check-inline">
-              <input class="form-check-input" formControlName="ativo" name="ativo" type="radio" id="radio2"
-                     value="false">
-              <label class="form-check-label" for="radio2">
-                Não
-              </label>
-            </div>
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-              <button type="button" class="btn btn-danger btn-sm" (click)="removeAtividade(i)">Remover</button>
-            </div>
-            <div *ngIf="atividade.invalid" class="text-danger">Inválido</div>
-          </div>
-        </div>
-      </div>
-      <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+      <div class="d-grid gap-2 d-md-flex justify-content-md-start pt-4 me-3 pe-4 ms-2">
         <button type="button" class="btn btn-outline-secondary w10" (click)="voltar()">Voltar ao Inicio</button>
-        <input type="submit" class="btn btn-primary w10" value="Cadastrar">
+        <input type="submit" class="btn btn-primary w10" [disabled]="usuarioForm.invalid" value="Cadastrar">
       </div>
   </form>
 </div>

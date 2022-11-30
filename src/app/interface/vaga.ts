@@ -1,12 +1,12 @@
 import {Empresa} from "./empresa";
 
 export interface Vaga {
-  id?: string
+  id: string
   nome: string
   tipo: string
   beneficios: string
   sobre?: string
-  dataTermino?: Date
+  dataTermino: string
   perguntas?: string[];
-  empresa?: Empresa
+  empresa: Empresa
 }

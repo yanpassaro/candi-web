@@ -9,16 +9,17 @@ import { VagaService } from "../../../../service/vaga.service";
 })
 export class CadastrarVagaComponent implements OnInit {
   ok: boolean = false;
+  message!: string;
 
   vagaForm = new FormGroup({
     nome: new FormControl([''], [Validators.required]),
     experiencia: new FormControl([''], [Validators.required]),
     beneficios: new FormControl([''], [Validators.required]),
     dataTermino: new FormControl([''], [Validators.required]),
+    tipo: new FormControl([''], [Validators.required]),
     sobre: new FormControl(''),
-    perguntas: new FormArray([new FormGroup({
-      perguntaV: new FormControl(''),
-    })
+    perguntas: new FormArray([
+      new FormControl('')
     ])
   })
 
@@ -27,7 +28,12 @@ constructor(private vagaService: VagaService) { }
   ngOnInit(): void { }
 
   onSubmit() {
-    this.vagaService.register(this.vagaForm.value).subscribe()
+    this.vagaService.register(this.vagaForm.value).subscribe(
+      r => this.ok = true,
+      error => {
+        this.message = error.error.message
+      }
+    )
   }
 
   get nome(): FormControl {
@@ -54,8 +60,8 @@ constructor(private vagaService: VagaService) { }
     return this.vagaForm.get('perguntas') as FormArray;
   }
 
-  get perguntasV(): FormControl {
-    return this.perguntas.get('perguntasv') as FormControl;
+  get tipo(): FormControl {
+    return this.vagaForm.get('tipo') as FormControl;
   }
 
   addPerguntas(){

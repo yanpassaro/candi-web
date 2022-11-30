@@ -1,9 +1,10 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {Response} from "../interface/response";
 import {Usuario} from '../interface/usuario';
 import {Router} from "@angular/router";
+import {Candidatura} from "../interface/candidatura";
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class UsuarioService {
   header
 
   constructor(private http: HttpClient, private router : Router) {
-    if (localStorage.length == 0){
+    if (localStorage.length == 0) {
       router.navigate([""])
     }
     this.token = localStorage.getItem('token')
@@ -25,12 +26,16 @@ export class UsuarioService {
     return this.http.get<Response<Usuario>>(`http://localhost:8080/api/usuario/visualizar`, {'headers': this.header})
   }
 
+  getCandidaturas(page: number) {
+    return this.http.get<Response<Candidatura[]>>(`http://localhost:8080/api/candidatura/visualizar/candidato?page=` + page, {'headers': this.header})
+  }
+
   register(usuario: any) {
     return this.http.post<Response<Usuario>>(`http://localhost:8080/api/usuario/cadastrar`, usuario)
   }
 
   update(usuario: any) {
-    return this.http.put<Response<Usuario>>(`http://localhost:8080/api/usuario/atualizar`,usuario, {'headers': this.header})
+    return this.http.put<Response<Usuario>>(`http://localhost:8080/api/usuario/atualizar`, usuario, {'headers': this.header})
   }
 
   delete() {

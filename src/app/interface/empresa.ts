@@ -8,5 +8,4 @@ export interface Empresa {
   estado?: string
   cidade?: string
   site?: string
-  portfolio?: string
 }

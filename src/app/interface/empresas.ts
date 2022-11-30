@@ -1,13 +1,13 @@
 import {Endereco} from "./endereco"
 import {Contato} from "./contato";
+import {Admin} from "./admin";
 
-export interface Usuario {
+export interface Empresas {
   id?: string
   nome: string
-  senha: string;
-  sobrenome: string
-  email: string
-  sobre?: string
+  cnpj: string
+  sobre: string
   contato: Contato
   endereco: Endereco
+  recrutadores: Admin[]
 }
