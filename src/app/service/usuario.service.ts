@@ -1,35 +1,28 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {Response} from "../interface/response";
 import {Usuario} from '../interface/usuario';
-import {catchError, of, tap} from 'rxjs';
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuarioService {
   private url: string = environment.API
+  token
+  header
 
-  constructor(private http: HttpClient) {
-  }
-
-  getHome() {
-    return this.http.get<Response<Usuario>>(this.url).pipe(
-      tap(resp => {
-        return resp.message
-      }),
-      catchError(err => err.mensagem)
-    )
+  constructor(private http: HttpClient, private router : Router) {
+    if (localStorage.length == 0){
+      router.navigate([""])
+    }
+    this.token = localStorage.getItem('token')
+    this.header = new HttpHeaders({'token': this.token!})
   }
 
   get() {
-    return this.http.get<Response<Usuario>>(`http://localhost:8080/api/candidato/visualizar`).pipe(
-      tap(resp => {
-        return resp.data
-      }),
-      catchError(err => err.mensagem)
-    )
+    return this.http.get<Response<Usuario>>(`http://localhost:8080/api/usuario/visualizar`, {'headers': this.header})
   }
 
   register(usuario: any) {
@@ -37,10 +30,10 @@ export class UsuarioService {
   }
 
   update(usuario: any) {
-    return this.http.put<Response<Usuario>>(`http://localhost:8080/api/candidato/atualizar` + localStorage.getItem('token'), usuario)
+    return this.http.put<Response<Usuario>>(`http://localhost:8080/api/usuario/atualizar`,usuario, {'headers': this.header})
   }
 
   delete() {
-    return this.http.delete<Response<Usuario>>(`http://localhost:8080/api/candidato/deletar/` + localStorage.getItem('token'))
+    return this.http.delete<Response<Usuario>>(`http://localhost:8080/api/usuario/deletar/`, {'headers': this.header})
   }
 }

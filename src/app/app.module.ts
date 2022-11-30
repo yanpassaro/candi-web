@@ -21,6 +21,7 @@ import { CadastrarVagaComponent } from './component/pages/vaga/cadastrar-vaga/ca
 import { CadastarCandidaturasComponent } from './candidatura/cadastrar/cadastrar.candidatura.component';
 import { VisualizarVagaComponent } from './vaga/visualizar.vaga/visualizar.vaga.component';
 import { CadastrarEmpresaComponent } from './empresa/cadastrar-empresa/cadastrar-empresa.component';
+import { VisualizarPerfilUsuarioComponent } from './usuario/visualizar.perfil.usuario/visualizar.perfil.usuario.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { CadastrarEmpresaComponent } from './empresa/cadastrar-empresa/cadastrar
     CadastrarVagaComponent,
     CadastarCandidaturasComponent,
     VisualizarVagaComponent,
-    CadastrarEmpresaComponent
+    CadastrarEmpresaComponent,
+    VisualizarPerfilUsuarioComponent
   ],
   imports: [
     BrowserModule,
