@@ -39,8 +39,7 @@ export class CadastrarEmpresaComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   get nome(): FormControl {
     return this.empresaForm.get('nome') as FormControl;

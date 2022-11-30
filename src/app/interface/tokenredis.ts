@@ -1,4 +1,4 @@
 export interface TokenRedis {
-  token: string;
+  token: any;
   role: string;
 }

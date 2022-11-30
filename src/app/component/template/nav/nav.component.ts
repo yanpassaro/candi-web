@@ -19,11 +19,21 @@ export class NavComponent implements OnInit {
   }
 
   isAdmin(): boolean{
-    return localStorage.getItem('role') == ( 'Administrador' );
+    return localStorage.getItem('role') == 'administrador';
   }
 
   isRecrutador(): boolean{
-    return localStorage.getItem('role') == ('Recrutador');
+    return localStorage.getItem('role') == 'recrutador';
   }
+
+  logout() {
+    localStorage.clear();
+  }
+
+  get verAuth(){
+    return localStorage.getItem('role')
+  }
+
+
 
 }

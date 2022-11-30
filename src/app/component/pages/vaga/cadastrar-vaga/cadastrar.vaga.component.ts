@@ -62,7 +62,7 @@ constructor(private vagaService: VagaService) { }
        new FormGroup({
           perguntasv: new FormControl(''),
      })
-    )};
+    )}
   }
 
   removePerguntas(idx: number) {
