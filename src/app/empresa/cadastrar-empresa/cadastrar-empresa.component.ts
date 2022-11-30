@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
+import {Router} from "@angular/router";
+import {EmpresaService} from "C:/Users/Yan/app-candi/src/app/service/empresa.service";
+import {catchError, of, tap} from "rxjs";
 
 @Component({
   selector: 'app-cadastrar-empresa',
@@ -8,6 +11,8 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 })
 export class CadastrarEmpresaComponent implements OnInit {
   ok: boolean = false;
+  emailCadastrado?: boolean;
+  cnpjCadastrado?: boolean;
 
   empresaForm = new FormGroup({
     nome: new FormControl([''], [Validators.required, Validators.minLength(8), Validators.maxLength(30)]),
@@ -26,18 +31,17 @@ export class CadastrarEmpresaComponent implements OnInit {
       site: new FormControl(null, [Validators.minLength(8), Validators.maxLength(30)]),
       portfolio: new FormControl(null, [Validators.minLength(8), Validators.maxLength(30)]),
     }),
-
-    administradores: new FormGroup({
-      nome: new FormControl([''], [Validators.required, Validators.minLength(8), Validators.maxLength(30)]),
-      sobrenome: new FormControl([''], [Validators.max(30)]),
-      email: new FormControl([''], [Validators.email, Validators.required, Validators.minLength(8), Validators.maxLength(30)]),
-      cSenha: new FormControl([''], [Validators.required, Validators.minLength(8), Validators.maxLength(30)]),
-      senha: new FormControl([''], [Validators.required, Validators.minLength(8), Validators.maxLength(30)]),
-      sobre: new FormControl([''], [Validators.maxLength(500)])
+    administradores: new FormArray({
+      nomeAdmin: new FormControl(null, [Validators.required, Validators.minLength(8), Validators.maxLength(30)]),
+      sobrenome: new FormControl(null, [Validators.max(30)]),
+      emailAdmin: new FormControl(null, [Validators.email, Validators.required, Validators.minLength(8), Validators.maxLength(30)]),
+      cSenha: new FormControl(null, [Validators.required, Validators.minLength(8), Validators.maxLength(30)]),
+      senha: new FormControl(null,[Validators.required, Validators.minLength(8), Validators.maxLength(30)]),
+      sobre: new FormControl(null,[Validators.maxLength(500)])
     })
   })
 
-  constructor() { }
+     constructor( private router: Router, private empresaService: EmpresaService) { }
 
   ngOnInit(): void {}
 
@@ -53,10 +57,42 @@ export class CadastrarEmpresaComponent implements OnInit {
     return this.empresaForm.get('sobre') as FormControl;
   }
 
-
-
-
-  onSubmit() {
-
+  get administradores(): FormGroup {
+    return this.empresaForm.get('administradores') as FormGroup;
   }
+
+  addAdministrador() {
+    if (this.administradores.length < 10) {
+      this.administradores.push(
+        new FormGroup({
+          local: new FormControl(null),
+          nome: new FormControl(null),
+          sobre: new FormControl(null),
+          dataInicio: new FormControl(null),
+          dataTermino: new FormControl(null),
+          ativo: new FormControl(false)
+        })
+      )
+      this.atividadesMax = false;
+    } else {
+      this.atividadesMax = true;
+    }
+
+
+  onSubmit() { this.empresaService.register(this.empresaForm.value).subscribe(
+    a => {
+      this.ok = true
+      console.log(a.message)
+    }, error => {
+      if (error.error.status == 400) {
+        this.cnpjCadastrado = true;
+      }
+      if (error.status == 500) {
+        throw error.error.message
+      }
+      console.log(error.error.message)
+    }
+  )
+  }
+
 }

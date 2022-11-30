@@ -8,6 +8,8 @@ import { VagaService } from "../../../../service/vaga.service";
   styleUrls: ['./cadastrar.vaga.component.css']
 })
 export class CadastrarVagaComponent implements OnInit {
+  ok: boolean = false;
+
   vagaForm = new FormGroup({
     nome: new FormControl([''], [Validators.required]),
     experiencia: new FormControl([''], [Validators.required]),
@@ -70,6 +72,5 @@ constructor(private vagaService: VagaService) { }
       this.perguntas.removeAt(idx)
     }
   }
-
 
 }
