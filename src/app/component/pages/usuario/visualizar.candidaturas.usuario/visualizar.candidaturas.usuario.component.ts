@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {UsuarioService} from "../../service/usuario.service";
-import {Candidatura} from "../../interface/candidatura";
-import {CandidaturaService} from "../../service/candidatura.service";
+import {UsuarioService} from "../../../../service/usuario.service";
+import {Candidatura} from "../../../../interface/candidatura";
+import {CandidaturaService} from "../../../../service/candidatura.service";
 
 @Component({
   selector: 'app-visualizar.candidaturas.usuario',

@@ -1,12 +1,14 @@
 <nav class="navbar navbar-expand-lg bg-light">
   <div class="container-fluid">
-    <img src="../../../../assets/Candi.png" alt="Logo" width="30" height="30" class="img-thumbnail">
-    <span class="navbar-brand mb-0 h1"> CANDI </span>
-    <div class="collapse navbar-collapse" id="navbarNav">
+    <a class="nav-link" routerLink="">
+      <img src="assets/candi-logo.png" width="30" height="30" alt="candi-logo">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar"
+            aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbar">
       <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="">Home</a>
-        </li>
         <li class="nav-item" *ngIf="!isAuth()">
           <a class="nav-link" routerLink="login">Login</a>
         </li>
@@ -17,8 +19,8 @@
           <a class="nav-link" routerLink="cadastrar/empresa">Cadastrar Empresa</a>
         </li>
         <li class="nav-item" *ngIf="isAdmin()">
-        <a class="nav-link" routerLink="cadastrar/vaga">Cadastrar Vaga</a>
-      </li>
+          <a class="nav-link" routerLink="cadastrar/vaga">Cadastrar Vaga</a>
+        </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="visualizar/empresas">Empresas</a>
         </li>

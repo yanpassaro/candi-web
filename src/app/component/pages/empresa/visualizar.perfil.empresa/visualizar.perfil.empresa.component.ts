@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {Router} from "@angular/router";
-import {EmpresaService} from "../../service/empresa.service";
-import {Empresas} from "../../interface/empresas";
+import {EmpresaService} from "../../../../service/empresa.service";
+import {Empresas} from "../../../../interface/empresas";
 
 @Component({
   selector: 'app-visualizar.perfil.empresa',

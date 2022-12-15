@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Vaga} from "../../interface/vaga";
-import {VagaService} from "../../service/vaga.service";
+import {Vaga} from "../../../../interface/vaga";
+import {VagaService} from "../../../../service/vaga.service";
 import {Router} from "@angular/router";
 
 @Component({

@@ -1,5 +1,17 @@
-<footer class="bg-light text-center text-lg-start">
-  <div class="text-center p-lg-2" style="background-color: rgba(59,59,59,0.2);">
-    CANDI © 2022 Copyright
+<footer class="footer container-fluid p-3">
+  <hr>
+  <div class="d-inline-block p-4">
+    <a routerLink="">
+      <img src="assets/candi-logo.png" width="26" height="26" alt="candi-logo">
+    </a>
+    <div class="d-inline text-muted" style="font-size: 12px">
+      Candi, 2022
+    </div>
+  </div>
+  <div class="d-inline-block float-end p-4">
+      <a class="link-secondary me-5" routerLink="">Home</a>
+      <a class="link-secondary me-5" *ngIf="!auth()" routerLink="login">Login</a>
+      <a class="link-secondary me-5" *ngIf="auth()" routerLink="perfil">Perfil</a>
+      <a class="link-secondary me-5" *ngIf="auth()" routerLink="perfil/empresa">Perfil</a>
   </div>
 </footer>

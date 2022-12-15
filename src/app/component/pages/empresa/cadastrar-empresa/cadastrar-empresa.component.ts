@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
-import {EmpresaService} from "C:/Users/Yan/app-candi/src/app/service/empresa.service";
+import {EmpresaService} from "../../../../service/empresa.service";
+
 
 @Component({
   selector: 'app-cadastrar-empresa',

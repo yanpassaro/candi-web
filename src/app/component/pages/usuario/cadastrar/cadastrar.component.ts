@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
-import {UsuarioService} from "../../../service/usuario.service";
+import {UsuarioService} from "../../../../service/usuario.service";
 
 @Component({
   selector: 'app-cadastrar',

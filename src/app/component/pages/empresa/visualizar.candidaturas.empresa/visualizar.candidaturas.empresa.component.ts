@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {CandidaturaService} from "../../service/candidatura.service";
-import {Candidatura} from "../../interface/candidatura";
+import {CandidaturaService} from "../../../../service/candidatura.service";
+import {Candidatura} from "../../../../interface/candidatura";
 
 @Component({
   selector: 'app-visualizar.candidaturas.empresa',

@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {EmpresaService} from "../../../service/empresa.service";
-import {Empresa} from "../../../interface/empresa";
+import {EmpresaService} from "../../service/empresa.service";
+import {Empresa} from "../../interface/empresa";
 
 @Component({
   selector: 'app-view',
-  templateUrl: './view.component.html',
-  styleUrls: ['./view.component.css']
+  templateUrl: './visualizar.empresa.component.html',
+  styleUrls: ['./visualizar.empresa.component.css']
 })
-export class ViewComponent implements OnInit {
+export class VisualizarEmpresaComponent implements OnInit {
   empresas?: Empresa[]
   notExist?: boolean = false;
 
