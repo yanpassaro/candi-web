@@ -1,27 +1,40 @@
-# AppCandi
+<p align="center">
+<img src="https://img.shields.io/github/contributors/yanpassaro/candi-web?logo=github&color=gree&style=flat-square">
+<img src="https://img.shields.io/github/languages/count/yanpassaro/candi-web?logo=github&style=flat-square">
+<img src="https://img.shields.io/github/forks/yanpassaro/candi-web?logo=github&style=flat-square">
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.6.
+<hr>
 
-## Development server
+# Candi WEB
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Built with [Angular](https://github.com/angular), this is a front-end application designed as an example Candi consumer.
 
-## Code scaffolding
+# Getting started
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+These instructions will provide you with a copy of the front-end version of the Candi system on your local machine for development and testing purposes.
 
-## Build
+For the full functioning of this application, it is necessary to install and operate the [Candi API](https://github.com/yanpassaro/candi).
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+The installer used was NPM.
 
-## Running unit tests
+## Angular configuration
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+First, you need to install npm, for that you will need to install node.js [here](https://nodejs.org/en/).
+  
+Now let's install the angular CLI
 
-## Running end-to-end tests
+    npm install -g @angular/cli
+    ng version
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## How to install
 
-## Further help
+    git clone https://github.com/yanpassaro/candi-web.git
+    cd candi-web
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Now that we have installed let's start it
+
+    ng serve
+    
+Go to
+
+    http://localhost:4200
