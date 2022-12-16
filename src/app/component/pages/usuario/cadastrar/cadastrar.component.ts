@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {UsuarioService} from "../../../../service/usuario.service";
+import {catchError, tap} from "rxjs";
 
 @Component({
   selector: 'app-cadastrar',
@@ -9,89 +10,111 @@ import {UsuarioService} from "../../../../service/usuario.service";
   styleUrls: ['./cadastrar.component.css']
 })
 export class CadastrarComponent implements OnInit {
-  emailCadastrado?: boolean;
-  ok: boolean = false;
-
-  usuarioForm = new FormGroup({
-    nome: new FormControl([''], [Validators.required, Validators.minLength(8), Validators.maxLength(30)]),
-    sobrenome: new FormControl([''], [Validators.max(30)]),
-    email: new FormControl([''], [Validators.email, Validators.required, Validators.minLength(8), Validators.maxLength(30)]),
-    cSenha: new FormControl([''], [Validators.required, Validators.minLength(8), Validators.maxLength(30)]),
-    senha: new FormControl([''], [Validators.required, Validators.minLength(8), Validators.maxLength(30)]),
-    sobre: new FormControl([''], [Validators.maxLength(500)])
+  messagem?: string
+  usuario = new FormGroup({
+    nome: new FormControl(null, [
+      Validators.required,
+      Validators.minLength(8),
+      Validators.maxLength(30)
+    ]),
+    sobrenome: new FormControl(null, [
+      Validators.max(30)
+    ]),
+    email: new FormControl(null, [
+      Validators.email,
+      Validators.required,
+      Validators.minLength(8),
+      Validators.maxLength(30)
+    ]),
+    cSenha: new FormControl(null, [
+      Validators.required,
+      Validators.minLength(8),
+      Validators.maxLength(30)
+    ]),
+    senha: new FormControl(null, [
+      Validators.required,
+      Validators.minLength(8),
+      Validators.maxLength(30)
+    ]),
+    sobre: new FormControl(null, [
+      Validators.maxLength(500)
+    ])
     ,
     endereco: new FormGroup({
-      cep: new FormControl(null, [Validators.minLength(8), Validators.maxLength(8)]),
-      cidade: new FormControl(null, [Validators.minLength(8), Validators.maxLength(8)]),
-      estado: new FormControl(null, [Validators.minLength(8), Validators.maxLength(8)]),
+      cep: new FormControl(null, [
+        Validators.minLength(8),
+        Validators.maxLength(8)
+      ]),
+      cidade: new FormControl(null, [
+        Validators.minLength(8),
+        Validators.maxLength(8)
+      ]),
+      estado: new FormControl(null, [
+        Validators.minLength(8),
+        Validators.maxLength(8)
+      ]),
     }),
     contato: new FormGroup({
-      email: new FormControl(null, [Validators.email, Validators.minLength(8), Validators.maxLength(30)]),
-      telefone: new FormControl(null, [Validators.minLength(8), Validators.maxLength(8)]),
-      site: new FormControl(null, [Validators.minLength(8), Validators.maxLength(30)]),
-      portfolio: new FormControl(null, [Validators.minLength(8), Validators.maxLength(30)]),
-    }),
-    atividades: new FormArray([
-      new FormGroup({
-        local: new FormControl(),
-        nome: new FormControl(),
-        sobre: new FormControl(),
-        dataInicio: new FormControl(),
-        dataTermino: new FormControl(),
-        ativo: new FormControl(),
-      })
-    ])
+      email: new FormControl(null, [
+        Validators.email,
+        Validators.minLength(8),
+        Validators.maxLength(30)
+      ]),
+      telefone: new FormControl(null, [
+        Validators.minLength(8),
+        Validators.maxLength(8)
+      ]),
+      site: new FormControl(null, [
+        Validators.minLength(8),
+        Validators.maxLength(30)
+      ])
+    })
   })
-
 
   constructor(private router: Router, private usuarioService: UsuarioService) {
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   get nome(): FormControl {
-    return this.usuarioForm.get('nome') as FormControl;
+    return this.usuario.get('nome') as FormControl;
   }
 
   get sobrenome(): FormControl {
-    return this.usuarioForm.get('sobrenome') as FormControl;
+    return this.usuario.get('sobrenome') as FormControl;
   }
 
   get email(): FormControl {
-    return this.usuarioForm.get('email') as FormControl;
+    return this.usuario.get('email') as FormControl;
   }
 
   get senha(): FormControl {
-    return this.usuarioForm.get('senha') as FormControl;
+    return this.usuario.get('senha') as FormControl;
   }
 
   get sobre(): FormControl {
-    return this.usuarioForm.get('sobre') as FormControl;
+    return this.usuario.get('sobre') as FormControl;
   }
 
   get cSenha() {
-    return this.usuarioForm.get('cSenha') as FormControl
+    return this.usuario.get('cSenha') as FormControl
   }
 
   senhaDiferentes() {
     return this.senha.getRawValue() != this.cSenha.getRawValue();
   }
 
-  voltar() {
-    this.router.navigate(["/"]).then(r => r)
-  }
-
   onSubmit() {
-    this.usuarioService.register(this.usuarioForm.value).subscribe(
-      a => {
-        this.ok = true;
-        console.log(a.message)
-      }, error => {
-        if (error.error.status == 400) {
-          this.emailCadastrado = true;
+    this.usuarioService.register(this.usuario.value).pipe(
+      tap(r => {
+        this.messagem = r.message
+      }),
+      catchError(error => {
+          this.messagem = error.error.message
+          return error
         }
-        console.log(error.error.message)
-      }
+      )
     )
   }
 }

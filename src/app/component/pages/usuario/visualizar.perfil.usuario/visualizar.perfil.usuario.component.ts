@@ -10,7 +10,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./visualizar.perfil.usuario.component.css']
 })
 export class VisualizarPerfilUsuarioComponent implements OnInit {
-  usuario?: Usuario;
+  user?: Usuario;
   ok: boolean = false;
 
   constructor(private usuarioService: UsuarioService, private router: Router) {
@@ -19,7 +19,7 @@ export class VisualizarPerfilUsuarioComponent implements OnInit {
 
   ngOnInit(): void {
     this.usuarioService.get().subscribe(
-    user => this.usuario = user.data!
+    user => this.user = user.data!
     , err =>
       this.router.navigate(["login"])
   )}
@@ -32,9 +32,6 @@ export class VisualizarPerfilUsuarioComponent implements OnInit {
     )
   }
 
-  voltar() {
-    this.router.navigate([""])
-  }
 
   candidaturas() {
     this.router.navigate(["perfil/candidaturas"])

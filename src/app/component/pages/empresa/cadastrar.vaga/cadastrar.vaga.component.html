@@ -1,0 +1,56 @@
+<section class="container-fluid p-5" xmlns="http://www.w3.org/1999/html">
+  <h6 class="text-black">Cadastrar vaga</h6>
+  <form [formGroup]="vaga" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col">
+        <label for="nome" class="form-label">Nome</label>
+        <input type="text" class="form-control" formControlName="nome" id="nome">
+        <span *ngIf="nome.errors?.['required'] && nome.touched" class="text-danger form-text">
+          Nome é obrigatório
+        </span>
+      </div>
+
+      <div class="col">
+        <label for="beneficios" class="form-label">Benefícios</label>
+        <input type="text" class="form-control" formControlName="beneficios" id="beneficios">
+        <span *ngIf="beneficios.errors?.['required'] && beneficios.touched" class="text-danger form-text">
+          Obrigatório
+        </span>
+      </div>
+
+      <div class="col">
+        <label for="data-termino" class="form-label">Data termino</label>
+        <input type="data" class="form-control" formControlName="dataTermino" id="data-termino" placeholder="yyyy-mm-dd">
+        <span *ngIf="dataTermino.errors?.['required'] && sobre.touched" class="text-danger form-text">
+          Obrigatório
+        </span>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <label class="input-group-text" for="input-group-select">Tipo</label>
+          </div>
+          <select formControlName="tipo" class="custom-select" id="input-group-select">
+            <option value="ESTAGIO" selected>Estágio</option>
+            <option value="INTEGRAL">Integral</option>
+            <option value="VOLUNTARIO">Voluntario</option>
+          </select>
+          <span *ngIf="tipo.errors?.['required'] && tipo.touched" class="text-danger form-text">
+          Obrigatório
+        </span>
+        </div>
+
+        <div class="col">
+          <label for="sobre" class="form-label">Sobre</label>
+          <input type="text" class="form-control" formControlName="sobre" id="sobre">
+          <span *ngIf="sobre.errors?.['required'] && sobre.touched" class="text-danger form-text">
+          Obrigatório
+        </span>
+        </div>
+
+        <div class="d-grid">
+          <input type="submit" class="btn btn-outline-dark" value="Cadastrar">
+        </div>
+      </div>
+    </div>
+  </form>
+</section>
+

@@ -1,12 +1,8 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {VisualizarEmpresaComponent} from "./component/visualizar.empresa/visualizar.empresa.component";
 import {CadastrarComponent} from "./component/pages/usuario/cadastrar/cadastrar.component";
-import {CadastrarVagaComponent} from "./component/pages/empresa/cadastrar-vaga/cadastrar.vaga.component";
-import {VisualizarVagaComponent} from "./component/visualizar.vaga/visualizar.vaga.component";
 import {CadastarCandidaturasComponent} from "./component/pages/usuario/cadastrar.candidatura/cadastrar.candidatura.component";
 import {LoginComponent} from "./component/login/login.component";
-import {CadastrarEmpresaComponent} from "./component/pages/empresa/cadastrar-empresa/cadastrar-empresa.component";
 import {
   VisualizarPerfilUsuarioComponent
 } from "./component/pages/usuario/visualizar.perfil.usuario/visualizar.perfil.usuario.component";
@@ -20,9 +16,8 @@ import {VisualizarVagasEmpresaComponent} from "./component/pages/empresa/visuali
 import {
   VisualizarCandidaturasEmpresaComponent
 } from "./component/pages/empresa/visualizar.candidaturas.empresa/visualizar.candidaturas.empresa.component";
-import {
-  AnalisarCandidaturaEmpresaComponent
-} from "./component/pages/empresa/analisar.candidatura.empresa/analisar.candidatura.empresa.component";
+import {CadastrarEmpresaComponent} from "./component/pages/empresa/cadastrar.empresa/cadastrar.empresa.component";
+import {CadastrarVagaComponent} from "./component/pages/empresa/cadastrar.vaga/cadastrar.vaga.component";
 
 const routes: Routes = [
   {
@@ -38,16 +33,10 @@ const routes: Routes = [
     path: "cadastrar", component: CadastrarComponent
   },
   {
-    path: "visualizar/empresas", component: VisualizarEmpresaComponent
-  },
-  {
     path: "cadastrar/empresa", component: CadastrarEmpresaComponent
   },
   {
     path: "cadastrar/vaga", component: CadastrarVagaComponent
-  },
-  {
-    path: "visualizar/vaga", component: VisualizarVagaComponent
   },
   {
     path: "candidatar/:id", component: CadastarCandidaturasComponent
@@ -64,12 +53,6 @@ const routes: Routes = [
   {
     path: "visualizar/candidaturas/:id", component: VisualizarCandidaturasEmpresaComponent
   },
-  {
-    path: "analisar/candidatura/:id", component: AnalisarCandidaturaEmpresaComponent
-  }
-
-
-
 ];
 
 @NgModule({

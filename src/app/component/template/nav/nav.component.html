@@ -9,6 +9,9 @@
     </button>
     <div class="collapse navbar-collapse" id="navbar">
       <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="">Home</a>
+        </li>
         <li class="nav-item" *ngIf="!isAuth()">
           <a class="nav-link" routerLink="login">Login</a>
         </li>
@@ -20,12 +23,6 @@
         </li>
         <li class="nav-item" *ngIf="isAdmin()">
           <a class="nav-link" routerLink="cadastrar/vaga">Cadastrar Vaga</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="visualizar/empresas">Empresas</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="visualizar/vaga">Vagas</a>
         </li>
         <li class="nav-item" *ngIf="isAdmin()">
           <a class="nav-link" routerLink="empresa/vagas">Suas vagas</a>

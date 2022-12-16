@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CadastrarEmpresaComponent } from './cadastrar-empresa.component';
+import { CadastrarEmpresaComponent } from './cadastrar.empresa.component';
 
 describe('CadastrarEmpresaComponent', () => {
   let component: CadastrarEmpresaComponent;

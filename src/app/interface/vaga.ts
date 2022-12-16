@@ -1,5 +1,3 @@
-import {Empresa} from "./empresa";
-
 export interface Vaga {
   id: string
   nome: string
@@ -8,5 +6,4 @@ export interface Vaga {
   sobre?: string
   dataTermino: string
   perguntas?: string[];
-  empresa: Empresa
 }

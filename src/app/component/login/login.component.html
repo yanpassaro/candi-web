@@ -1,13 +1,13 @@
 <section class="container-fluid p-5">
-  <section class="d-flex justify-content-center">
-    <div class="card" style="width: 500px">
-      <div class="card-header text-center">
-        <span class="h3">Login</span>
+  <section class="d-grid justify-content-center">
+    <img src="assets/candi-logo.png" alt="Logo" class="rounded mx-auto d-block" width="60" height="60">
+    <span class="h2 m-2 text-center">Entrar no Candi</span>
+    <div class="card" style="width: 400px">
+      <div class="card-header bg-body text-center border-0">
       </div>
       <div class="card-body">
         <form [formGroup]="loginForm" (ngSubmit)="submit()">
-          <label for="inputEmail" class="form-label h6">Email</label>
-          <input type="text" class="form-control" formControlName="email" id="inputEmail" placeholder="Email">
+          <input type="text" class="form-control" formControlName="email" placeholder="Email">
           <div class="text-danger form-text"> {{ mensagem }} </div>
           <span *ngIf="email.errors?.['required'] && email.dirty" class="text-danger form-text">
             O email é obrigatório
@@ -21,8 +21,8 @@
           <span *ngIf="email.errors?.['maxlength'] && email.touched" class="text-danger form-text">
             Máximo de 30 caracteres
           </span>
-          <label for="inputSenha" class="form-label h6 pt-2">Senha</label>
-          <input type="text" class="form-control" formControlName="senha" id="inputSenha" placeholder="Senha">
+
+          <input type="text" class="form-control mt-4" formControlName="senha" placeholder="Senha">
           <span *ngIf="senha.errors?.['required'] && senha.touched" class="text-danger form-text">
             Senha é obrigatória
           </span>
@@ -32,31 +32,16 @@
           <span *ngIf="senha.errors?.['maxlength'] && senha.touched" class="text-danger form-text">
             Sua senha deve ter no máximo 30 caracteres
           </span>
-          <div class="pt-3">
-            <label class="form-label h6 d-inline">Tipo</label>
-            <div class="form-check-inline d-inline d-block">
-              <input class="form-check-input" formControlName="tipo" name="tipo"
-                     type="radio" id="radio" value="user">
-              <label class="form-check-label" for="radio">
-                Usuário
-              </label>
-            </div>
-            <div class="form-check-inline d-inline d-block">
-              <input class="form-check-input" formControlName="tipo" name="tipo"
-                     type="radio" id="radio1" value="empresa">
-              <label class="form-check-label" for="radio1">
-                Administrador
-              </label>
-            </div>
-            <span *ngIf="tipo.invalid && tipo.touched" class="form-text text-danger">Escolha um tipo de login</span>
-          </div>
-          <div class="d-grid gap-2 mx-auto m-3">
-            <input type="submit" class="btn btn-block"
-                   style="background-color: dodgerblue; border-color: dodgerblue; color: azure"
-                   value="Login">
-            <a type="button" class="btn btn-outline-secondary" routerLink="/cadastrar">Registre-se</a>
+
+          <div class="d-grid mx-auto mt-3">
+            <input type="submit" class="btn btn-dark" value="Entrar">
           </div>
         </form>
+      </div>
+    </div>
+    <div class="card mt-3 text-center">
+      <div class="card-body">
+        Não tem uma conta? <a type="button" class="link-info" routerLink="/cadastrar">Crie agora.</a>
       </div>
     </div>
   </section>

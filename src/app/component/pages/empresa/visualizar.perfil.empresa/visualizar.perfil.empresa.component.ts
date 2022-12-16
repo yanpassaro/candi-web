@@ -17,7 +17,7 @@ export class VisualizarPerfilEmpresaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.empresaService.get().subscribe(
+    this.empresaService.perfil().subscribe(
       r => {
         this.empresas = r.data!
       }, error => {
@@ -32,7 +32,7 @@ export class VisualizarPerfilEmpresaComponent implements OnInit {
   }
 
   deletar() {
-    this.empresaService.deleteEmpresa().subscribe(
+    this.empresaService.deletar().subscribe(
       user => this.router.navigate(["perfil/empresa"])
     )
   }

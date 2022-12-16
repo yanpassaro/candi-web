@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {FormArray, FormControl, FormGroup} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {VagaService} from "../../../../service/vaga.service";
 import {Vaga} from "../../../../interface/vaga";
+import {catchError, tap} from "rxjs";
 
 @Component({
   selector: 'app-cadastro.usuario',
@@ -10,50 +10,30 @@ import {Vaga} from "../../../../interface/vaga";
   styleUrls: ['./cadastrar.candidatura.component.css']
 })
 export class CadastarCandidaturasComponent implements OnInit {
-  vagaCadastrada?:boolean;
-  message?: string;
-  idVaga?: any;
-  token?: any;
-  vaga!: Vaga;
-
-  cadastroForm = new FormGroup({
-    respostas: new FormArray([
-      new FormControl([''])
-    ])
-  })
+  message?: string
+  error = false
+  id: any
+  vaga?: Vaga
 
   constructor(private router: Router, private activeRouter: ActivatedRoute, private vagaService: VagaService) {
   }
 
   ngOnInit(): void {
-    if (localStorage.getItem('token') == null) {
-      this.router.navigate(["login"])
-    }
-    this.token = localStorage.getItem('token')
-    this.activeRouter.params.subscribe(
-      r => {
-        this.idVaga = r?.['id']
-        console.log(this.idVaga)
-      }
-    )
-    this.vagaService.detalhar(this.idVaga).subscribe(
-      r => {
-        console.log(r.data)
-        this.vaga = r.data!
-        this.vagaCadastrada = true;
-      }
+    this.activeRouter.params.pipe(
+      tap(n => {
+          this.id = n?.['id']
+          console.log(this.id)
+        }
+      ),
+      catchError(error => {
+        this.message = error.error.message
+        this.error = true
+        return error
+      })
     )
   }
 
-  get respostas(): FormArray {
-    return this.cadastroForm.get('respostas') as FormArray;
-  }
-
-  voltar() {
-    this.router.navigate(["/"]).then()
-  }
-
-  onSubmit() {
+  cadastrar() {
 
   }
 }

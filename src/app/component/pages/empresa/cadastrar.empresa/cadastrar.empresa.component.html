@@ -1,0 +1,104 @@
+<section class="container-sm p-5">
+  <p class="text-black h3">Cadastro</p>
+
+  <form [formGroup]="empresa" (ngSubmit)="enviar()">
+    <div class="col">
+      <label for="nome" class="form-label mt-2">Nome</label>
+      <input type="text" class="form-control mt-2" formControlName="nome" id="nome" placeholder="Nome">
+      <span *ngIf="nome.errors?.['required'] && nome.touched" class="text-danger form-text">
+        Nome é obrigatório
+      </span>
+      <span *ngIf="nome.errors?.['maxlength'] && nome.touched" class="text-danger form-text">
+        Máximo 30 caracteres
+      </span>
+    </div>
+
+    <div class="col">
+      <label for="cnpj" class="form-label mt-2">CNPJ</label>
+      <input type="text" class="form-control mt-2" formControlName="cnpj" id="cnpj" placeholder="CNPJ">
+      <span *ngIf="(cnpj.errors?.['maxlength'] || cnpj.errors?.['minlength']) && cnpj.touched" class="text-danger form-text">
+        Necessário 14 caracteres
+      </span>
+    </div>
+
+    <div class="col">
+      <label for="sobre" class="form-label mt-2">Sobre</label>
+      <textarea class="form-control mt-2" formControlName="sobre" id="sobre" rows="3"></textarea>
+      <span *ngIf="sobre.errors?.['maxlength'] && cnpj.touched" class="text-danger form-text">
+        Máximo 500 caracteres
+      </span>
+    </div>
+
+    <div formGroupName="endereco">
+      <p class="text-black h5 mt-4">Endereço</p>
+
+      <div class="row">
+        <div class="col">
+          <label for="cep" class="form-label mt-2">Cep</label>
+          <input type="text" class="form-control" formControlName="cep mt-2" id="cep">
+          <span *ngIf="endereco?.get('cep')?.errors?.['required'] && endereco?.get('cep')?.touched" class="text-danger form-text">
+            CEP é obrigatório
+          </span>
+          <span *ngIf="(endereco?.get('cep')?.errors?.['maxlength'] || endereco?.get('cep')?.errors?.['minlength']) && endereco?.get('cep')?.touched" class="text-danger form-text">
+            CEP deve ter 8 caracteres
+          </span>
+        </div>
+
+        <div class="col">
+          <label for="estado" class="form-label mt-2">Estado</label>
+          <input type="text" class="form-control" formControlName="estado mt-2" id="estado">
+          <span *ngIf="endereco?.get('estado')?.errors?.['required'] && endereco?.get('estado')?.touched" class="text-danger form-text">
+            O Estado é obrigatório
+          </span>
+        </div>
+      </div>
+
+        <div class="row">
+          <div class="col">
+            <label for="cidade" class="form-label mt-2">Cidade</label>
+            <input type="text" formControlName="cidade" class="form-control mt-2" id="cidade">
+            <span *ngIf="endereco?.get('cidade')?.errors?.['required'] && endereco?.get('cidade')?.touched" class="text-danger form-text">
+            A cidade é obrigatória
+          </span>
+          </div>
+        </div>
+      </div>
+
+    <div formGroupName="contato">
+      <p class="text-black h5 mt-4">Contato</p>
+      <div class="row">
+        <div class="col">
+          <label for="email-contato" class="form-label mt-2">Email para contato</label>
+          <input type="text" formControlName="email" class="form-control mt-2" id="email-contato">
+          <span *ngIf="contato?.get('email')?.errors?.['required'] && contato?.get('email')?.touched" class="text-danger form-text">
+            Email é obrigatório
+          </span>
+          <span *ngIf="contato?.get('email')?.errors?.['email'] && contato?.get('email')?.touched" class="text-danger form-text">
+            Email deve estar bem formatado
+          </span>
+        </div>
+        <div class="col">
+          <label for="telefone" class="form-label mt-2">Telefone</label>
+          <input type="text" formControlName="telefone" class="form-control mt-2" id="telefone">
+          <span *ngIf="contato?.get('telefone')?.errors?.['required'] && contato?.get('telefone')?.touched" class="text-danger form-text">
+            Telefone é obrigatório
+          </span>
+          <span *ngIf="(contato?.get('telefone')?.errors?.['maxlength'] || contato?.get('telefone')?.errors?.['minlength']) && contato?.get('telefone')?.touched" class="text-danger form-text">
+            Telefone deve ter 14 caracteres
+          </span>
+        </div>
+      </div>
+      <div class="col">
+        <label for="site" class="form-label mt-2">Site</label>
+        <textarea type="text" formControlName="site" class="form-control" id="site" rows="2"></textarea>
+        <span *ngIf="contato?.get('site')?.errors?.['maxlength'] && contato?.get('site')?.touched" class="text-danger form-text">
+          Site deve ter no máximo 100 caracteres
+        </span>
+      </div>
+    </div>
+
+    <div class="d-grid mt-4 mx-auto">
+      <input type="submit" class="btn btn-dark" value="Cadastrar">
+    </div>
+  </form>
+</section>

@@ -1,10 +1,8 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Response} from "../interface/response";
 import {Usuario} from "../interface/usuario";
-import {catchError, of, tap} from "rxjs";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {environment} from "../../environments/environment";
-import {Vaga} from "../interface/vaga";
 import {Router} from "@angular/router";
 import {Candidatura} from "../interface/candidatura";
 
@@ -28,8 +26,8 @@ export class CandidaturaService {
     return this.http.post<Response<Candidatura>>(`http://localhost:8080/api/candidatura/cadastrar`, candidatura, {'headers': this.header})
   }
 
-  getAllByVaga(id: any) {
-    return this.http.get<Response<Candidatura[]>>(`http://localhost:8080/api/candidatura/visualizar?page=0&id=` +id, {'headers': this.header})
+  visualizarVagas(id: any) {
+    return this.http.get<Response<Candidatura[]>>(`http://localhost:8080/api/candidatura/visualizar?page=0&id=` + id, {'headers': this.header})
   }
 
   deletarCandidatura(id: any) {
