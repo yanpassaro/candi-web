@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg bg-light">
   <div class="container-fluid">
     <a class="nav-link" routerLink="">
-      <img src="assets/candi-logo.png" width="30" height="30" alt="candi-logo">
+      <img src="assets/candi-logo.png" width="50" height="50" alt="candi-logo">
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar"
             aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -18,23 +18,11 @@
         <li class="nav-item" *ngIf="!isAuth()">
           <a class="nav-link" routerLink="cadastrar">Cadastrar</a>
         </li>
-        <li class="nav-item" *ngIf="!isAuth()">
-          <a class="nav-link" routerLink="cadastrar/empresa">Cadastrar Empresa</a>
-        </li>
-        <li class="nav-item" *ngIf="isAdmin()">
-          <a class="nav-link" routerLink="cadastrar/vaga">Cadastrar Vaga</a>
-        </li>
-        <li class="nav-item" *ngIf="isAdmin()">
-          <a class="nav-link" routerLink="empresa/vagas">Suas vagas</a>
-        </li>
-        <li class="nav-item" *ngIf="isUser()">
+        <li class="nav-item" *ngIf="isAuth">
           <a class="nav-link" routerLink="perfil">Perfil</a>
         </li>
-        <li class="nav-item" *ngIf="isAdmin()">
-          <a class="nav-link" routerLink="perfil/empresa">Perfil</a>
-        </li>
         <li class="nav-item" (click)="logout()" *ngIf="isAuth()">
-          <a class="nav-link" routerLink="login">Logout</a>
+          <a class="nav-link" routerLink="login">logout</a>
         </li>
       </ul>
     </div>

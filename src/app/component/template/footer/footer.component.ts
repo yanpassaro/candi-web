@@ -9,10 +9,7 @@ export class FooterComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-  auth() {
-    return false;
-  }
+  isAuth() {return localStorage.getItem('token') != null}
 }

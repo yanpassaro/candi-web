@@ -6,9 +6,9 @@
       <div class="card-header bg-body text-center border-0">
       </div>
       <div class="card-body">
-        <form [formGroup]="loginForm" (ngSubmit)="submit()">
+        <div class="text-danger form-text"> {{ mensagem }} </div>
+        <form [formGroup]="login" (ngSubmit)="efetuar()">
           <input type="text" class="form-control" formControlName="email" placeholder="Email">
-          <div class="text-danger form-text"> {{ mensagem }} </div>
           <span *ngIf="email.errors?.['required'] && email.dirty" class="text-danger form-text">
             O email é obrigatório
           </span>

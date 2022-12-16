@@ -8,12 +8,10 @@
       Candi, 2022
     </div>
   </div>
-  <div class="d-inline-block p-4">
+  <div class="d-inline-block float-end p-4">
       <a class="link-dark me-3" routerLink="">Home</a>
-      <a class="link-dark me-3" *ngIf="!auth()" routerLink="login">Login</a>
-      <a class="link-dark me-3" *ngIf="!auth()" routerLink="login">Cadastrar</a>
-      <a class="link-dark me-3" *ngIf="!auth()" routerLink="login">Cadastrar Empresa</a>
-      <a class="link-dark me-3" *ngIf="auth()" routerLink="perfil">Perfil</a>
-      <a class="link-dark" *ngIf="auth()" routerLink="perfil/empresa">Perfil</a>
+      <a class="link-dark me-3" *ngIf="!isAuth()" routerLink="login">Login</a>
+      <a class="link-dark me-3" *ngIf="!isAuth()" routerLink="cadastrar">Cadastrar</a>
+      <a class="link-dark me-3" *ngIf="isAuth()" routerLink="perfil">Perfil</a>
   </div>
 </footer>
